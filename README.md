@@ -20,6 +20,7 @@ A custom Programming Language with no name
 2. Steps after this will vary based on platform
 
 
-## NOTES
+## Notes
 - Daylight savings is not supported
 - Compiler is still in development so a Temperary Testing Project is in place so logging and fileIO libraries can be tested
+- AU Time form is hour:minute:second day/month/year
