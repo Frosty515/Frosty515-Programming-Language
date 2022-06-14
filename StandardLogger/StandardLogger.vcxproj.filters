@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{25F339C1-1195-6497-FA4F-78EBE690EBE7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{74EC8C7C-6023-8E0D-0910-7410F5250A0F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger\Logger.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StandardLogger.h" />
+    <ClInclude Include="src\Time\Time.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Logger\Logger.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\Time.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

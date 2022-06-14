@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FileIO">
+      <UniqueIdentifier>{FD1DD1B2-E9BF-FB88-D27A-0FDDBEBB82D9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\FileIO\Core.h">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileIO\FileIO.h">
+      <Filter>FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StandardFileIO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\FileIO\FileIO.cpp">
+      <Filter>FileIO</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
