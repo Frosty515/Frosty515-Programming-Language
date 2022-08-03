@@ -24,7 +24,7 @@ namespace F515_StandardTime {
 			/* NOTE: Daylight savings not supported */
 		}
 		ss << t.tm_hour << ':' << t.tm_min << ':' << t.tm_sec << ' ' << t.tm_mday << '/';
-		int month = t.tm_mon++;
+		int month = t.tm_mon + 1;
 		int year = t.tm_year + 1900;
 		ss << month << '/' << year;
 		return ss.str();
@@ -38,7 +38,7 @@ namespace F515_StandardTime {
 			/* NOTE: Daylight savings not supported */
 		}
 		ss << t.tm_hour << ':' << t.tm_min << ':' << t.tm_sec << ' ' << t.tm_mday << '/';
-		int month = t.tm_mon++;
+		int month = t.tm_mon + 1;
 		int year = t.tm_year + 1900;
 		ss << month << '/' << year;
 		return ss.str();

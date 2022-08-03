@@ -4,4 +4,6 @@
 
 # Dirs
 .vs/
-Compiler/
+.vscode/
+bin-int/
+./bin/

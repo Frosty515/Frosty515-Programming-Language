@@ -1,6 +1,6 @@
 workspace "Frosty515"
     architecture "x64"
-    startproject "Testing"
+    startproject "Compiler"
 
     configurations
     {
@@ -40,9 +40,15 @@ project "StandardFileIO"
             "F515_BUILD_DLL"
         }
 
-        postbuildcommands
+    filter "system:linux"
+        cppdialect "C++2a"
+        staticruntime "On"
+        systemversion "latest"
+
+        defines
         {
-            
+            "F515_PLATFORM_LINUX",
+            "F515_BUILD_SO"
         }
 
     filter "configurations:Debug"
@@ -83,54 +89,15 @@ project "StandardLogger"
             "F515_BUILD_DLL"
         }
 
-        postbuildcommands
-        {
-            
-        }
-
-    filter "configurations:Debug"
-        defines "F515_DEBUG"
-        symbols "On"
-
-    filter "configurations:Release"
-        defines "F515_RELEASE"
-        optimize "On"
-
-project "Testing"
-    location "Testing"
-    kind "ConsoleApp"
-    language "C++"
-
-    targetdir ("bin/" .. outputdir)
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files
-    {
-        "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
-    }
-
-    includedirs
-    {
-        "StandardFileIO/src",
-        "StandardLogger/src",
-        "StandardTime/src"
-    }
-
-    links
-    {
-        "StandardFileIO",
-        "StandardLogger"
-    }
-
-    filter "system:windows" 
-        cppdialect "C++20"
+    filter "system:linux"
+        cppdialect "C++2a"
         staticruntime "On"
         systemversion "latest"
 
         defines
         {
-            "F515_PLATFORM_WINDOWS"
+            "F515_PLATFORM_LINUX",
+            "F515_BUILD_SO"
         }
 
     filter "configurations:Debug"
@@ -140,7 +107,6 @@ project "Testing"
     filter "configurations:Release"
         defines "F515_RELEASE"
         optimize "On"
-
 
 project "Compiler"
     location "Compiler"
@@ -159,18 +125,16 @@ project "Compiler"
     includedirs
     {
         "StandardFileIO/src",
-        "StandardLogger/src",
-        "StandardTime/src"
+        "StandardLogger/src"
     }
 
     links
     {
         "StandardFileIO",
-        "StandardLogger",
-        "StandardTime"
+        "StandardLogger"
     }
 
-    filter "system:windows" 
+    filter "system:windows"
         cppdialect "C++20"
         staticruntime "On"
         systemversion "latest"
@@ -178,6 +142,16 @@ project "Compiler"
         defines
         {
             "F515_PLATFORM_WINDOWS"
+        }
+
+    filter "system:linux"
+        cppdialect "C++2a"
+        staticruntime "On"
+        systemversion "latest"
+
+        defines
+        {
+            "F515_PLATFORM_LINUX"
         }
 
     filter "configurations:Debug"

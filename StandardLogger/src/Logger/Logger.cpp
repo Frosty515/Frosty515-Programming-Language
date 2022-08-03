@@ -17,7 +17,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::INFO;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -25,7 +25,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::INFO;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -34,7 +34,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::TRACE;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -42,7 +42,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::TRACE;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -51,7 +51,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::WARN;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -59,7 +59,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::WARN;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -68,7 +68,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::ERROR;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -76,7 +76,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::ERROR;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -85,7 +85,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::FATAL;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -93,7 +93,7 @@ namespace F515_StandardLogger {
 		MessageFormat out;
 		out.loggerLevel = (int)LoggerLevels::FATAL;
 		out.message = message;
-		out.time = m_Time.getCurrentLocalTime();
+		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
 		registerMessageForOutput(out);
 	}
@@ -176,7 +176,7 @@ namespace F515_StandardLogger {
 	/* Private methods: */
 
 	void Logger::registerMessageForOutput(MessageFormat format) {
-		if (!(m_LoggerLevel >= format.loggerLevel))
+		if (!(m_LoggerLevel <= format.loggerLevel))
 			return;
 
 		uint8_t colour;
@@ -208,8 +208,14 @@ namespace F515_StandardLogger {
 			return;
 		}
 
+		std::stringstream ss;
 
-		std::cout << "\x1B[" << colour << "m" << '<' << m_Time.formatTimeInAUForm(format.time) << "> " << temp << format.message << "\x1B[0m" << std::endl;
+		/* << "\x1B[" << colour << 'm' */
+		/* << "\x1B[0m" */
+		ss << '<' << m_Time.formatTimeInAUForm(format.time) << "> " << temp << format.message;
+
+
+		std::cout << ss.str() << std::endl;
 
 	}
 

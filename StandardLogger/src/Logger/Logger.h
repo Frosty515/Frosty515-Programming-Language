@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _LOGGER_H
+#define _LOGGER_H
+
 #include <string>
 #include <vector>
 #include "../Core.h"
@@ -61,3 +63,5 @@ namespace F515_StandardLogger {
 		FATAL = 4
 	};
 }
+
+#endif /* _LOGGER_H */

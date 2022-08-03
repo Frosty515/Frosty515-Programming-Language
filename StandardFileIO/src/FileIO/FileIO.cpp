@@ -2,14 +2,18 @@
 #include <fstream>
 #include <iostream>
 #include <sys/stat.h>
+
+#ifdef F515_PLATFORM_WINDOWS
 #include <direct.h>
+#endif
+
 #include <cstdio>
 #include <filesystem>
 #include <cstring>
 #include <string>
 #include <sstream>
 
-namespace Frosty515 {
+namespace F515_StandardFileIO {
 
 	FileIO::FileIO() {
 		Log("Frosty515FileUtils Initialized!");
@@ -274,11 +278,13 @@ namespace Frosty515 {
 		dst << source.rdbuf();
 	}
 
+	#ifdef F515_PLATFORM_WINDOWS
+
 	void FileIO::MakeDir(const std::string& path) {
 		int i = _mkdir(path.c_str());
 		if (i != 0) {
 			std::stringstream ss;
-			ss << "Error " << i << " occurred while removing directory " << path;
+			ss << "Error " << i << " occurred while making directory " << path;
 			std::string out = ss.str();
 			Log(out);
 		}
@@ -288,7 +294,7 @@ namespace Frosty515 {
 		int i = _mkdir(path);
 		if (i != 0) {
 			std::stringstream ss;
-			ss << "Error " << i << " occurred while removing directory " << path;
+			ss << "Error " << i << " occurred while making directory " << path;
 			std::string out = ss.str();
 			Log(out);
 		}
@@ -357,6 +363,8 @@ namespace Frosty515 {
 
 		}
 	}
+
+	#endif
 
 	void FileIO::Log(const char* str) {
 		std::cout << "<Frosty515FileUtils-StandardFileIO> " << str << std::endl;

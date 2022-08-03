@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STDLOGGER_TIME_H
+#define _STDLOGGER_TIME_H
 
 #include <stdint.h>
 #include <string>
@@ -21,3 +22,5 @@ namespace F515_StandardTime {
 	};
 
 }
+
+#endif /* _STDLOGGER_TIME_H */
