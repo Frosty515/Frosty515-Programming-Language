@@ -1,6 +1,6 @@
 workspace "Frosty515"
     architecture "x64"
-    startproject "Compiler"
+    startproject "Testing"
 
     configurations
     {
@@ -40,15 +40,9 @@ project "StandardFileIO"
             "F515_BUILD_DLL"
         }
 
-    filter "system:linux"
-        cppdialect "C++2a"
-        staticruntime "On"
-        systemversion "latest"
-
-        defines
+        postbuildcommands
         {
-            "F515_PLATFORM_LINUX",
-            "F515_BUILD_SO"
+            
         }
 
     filter "configurations:Debug"
@@ -89,15 +83,9 @@ project "StandardLogger"
             "F515_BUILD_DLL"
         }
 
-    filter "system:linux"
-        cppdialect "C++2a"
-        staticruntime "On"
-        systemversion "latest"
-
-        defines
+        postbuildcommands
         {
-            "F515_PLATFORM_LINUX",
-            "F515_BUILD_SO"
+            
         }
 
     filter "configurations:Debug"
@@ -108,8 +96,8 @@ project "StandardLogger"
         defines "F515_RELEASE"
         optimize "On"
 
-project "Compiler"
-    location "Compiler"
+project "Testing"
+    location "Testing"
     kind "ConsoleApp"
     language "C++"
 
@@ -125,7 +113,8 @@ project "Compiler"
     includedirs
     {
         "StandardFileIO/src",
-        "StandardLogger/src"
+        "StandardLogger/src",
+        "StandardTime/src"
     }
 
     links
@@ -134,7 +123,7 @@ project "Compiler"
         "StandardLogger"
     }
 
-    filter "system:windows"
+    filter "system:windows" 
         cppdialect "C++20"
         staticruntime "On"
         systemversion "latest"
@@ -142,16 +131,6 @@ project "Compiler"
         defines
         {
             "F515_PLATFORM_WINDOWS"
-        }
-
-    filter "system:linux"
-        cppdialect "C++2a"
-        staticruntime "On"
-        systemversion "latest"
-
-        defines
-        {
-            "F515_PLATFORM_LINUX"
         }
 
     filter "configurations:Debug"
