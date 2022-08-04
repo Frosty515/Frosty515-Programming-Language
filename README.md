@@ -7,7 +7,7 @@ A custom Programming Language with no name
 ## Updates
 ### 4 August 2022
 - StandardFileIO and StandardLogger libraries are almost complete
-- Compiler project with is in place with some base code.
+- Compiler project is in place with some base code.
 - Full Windows and Linux support currently and some things might work on Mac
 - All projects compile
 
