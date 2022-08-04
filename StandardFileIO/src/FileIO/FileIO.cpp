@@ -3,10 +3,6 @@
 #include <iostream>
 #include <sys/stat.h>
 
-#ifdef F515_PLATFORM_WINDOWS
-#include <direct.h>
-#endif
-
 #include <cstdio>
 #include <filesystem>
 #include <cstring>
@@ -16,7 +12,8 @@
 namespace F515_StandardFileIO {
 
 	FileIO::FileIO() {
-		Log("Frosty515FileUtils Initialized!");
+		m_Logger.ClearLog();
+		m_Logger.info("Frosty515 StandardFileIO initialized!");
 	}
 
 	FileIO::~FileIO() {
@@ -278,10 +275,8 @@ namespace F515_StandardFileIO {
 		dst << source.rdbuf();
 	}
 
-	#ifdef F515_PLATFORM_WINDOWS
-
 	void FileIO::MakeDir(const std::string& path) {
-		int i = _mkdir(path.c_str());
+		uint64_t i = m_OSUtils._MKDIR(path.c_str());
 		if (i != 0) {
 			std::stringstream ss;
 			ss << "Error " << i << " occurred while making directory " << path;
@@ -291,7 +286,7 @@ namespace F515_StandardFileIO {
 	}
 
 	void FileIO::MakeDir(const char* path) {
-		int i = _mkdir(path);
+		uint64_t i = m_OSUtils._MKDIR(path);
 		if (i != 0) {
 			std::stringstream ss;
 			ss << "Error " << i << " occurred while making directory " << path;
@@ -305,7 +300,7 @@ namespace F515_StandardFileIO {
 			return;
 
 		if (isDirectoryEmpty(path)) {
-			int i = _rmdir(path.c_str());
+			uint64_t i = m_OSUtils._RMDIR(path.c_str());
 			if (i != 0) {
 				Log(("The following error occurred while removing empty directory: " + i));
 			}
@@ -320,11 +315,11 @@ namespace F515_StandardFileIO {
 				if (isFile(file))
 					DeleteFile(file);
 				else if (isDirectory(file))
-					RemoveDir(file);
+					RemoveDir(file, true);
 				else
 					return;
 			}
-			int i = _rmdir(path.c_str());
+			uint64_t i = m_OSUtils._RMDIR(path.c_str());
 			if (i != 0) {
 				Log(("The following error occurred while removing empty directory: " + i));
 			}
@@ -337,7 +332,7 @@ namespace F515_StandardFileIO {
 			return;
 
 		if (isDirectoryEmpty(path)) {
-			int i = _rmdir(path);
+			uint64_t i = m_OSUtils._RMDIR(path);
 			if (i != 0) {
 				Log(("The following error occurred while removing empty directory: " + i));
 			}
@@ -352,19 +347,17 @@ namespace F515_StandardFileIO {
 				if (isFile(file))
 					DeleteFile(file);
 				else if (isDirectory(file))
-					RemoveDir(file);
+					RemoveDir(file, true);
 				else
 					return;
 			}
-			int i = _rmdir(path);
+			uint64_t i = m_OSUtils._RMDIR(path);
 			if (i != 0) {
 				Log(("The following error occurred while removing empty directory: " + i));
 			}
 
 		}
 	}
-
-	#endif
 
 	void FileIO::Log(const char* str) {
 		std::cout << "<Frosty515FileUtils-StandardFileIO> " << str << std::endl;

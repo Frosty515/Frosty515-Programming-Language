@@ -6,8 +6,16 @@ namespace F515_StandardLogger {
 
 	/* Public methods: */
 
-	Logger::Logger() : m_LoggerLevel(0) {
-		
+	Logger::Logger() {
+		#ifdef F515_DEBUG
+			m_LoggerLevel = INFO;
+		#else
+			#ifdef F515_RELEASE
+				m_LoggerLevel = WARN;
+			#else
+				m_LoggerLevel = INFO;
+			#endif
+		#endif
 	}
 	Logger::~Logger() {
 
@@ -15,7 +23,7 @@ namespace F515_StandardLogger {
 
 	void Logger::info(const std::string& message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::INFO;
+		out.loggerLevel = INFO;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -23,7 +31,7 @@ namespace F515_StandardLogger {
 	}
 	void Logger::info(const char* message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::INFO;
+		out.loggerLevel = INFO;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -32,7 +40,7 @@ namespace F515_StandardLogger {
 
 	void Logger::trace(const std::string& message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::TRACE;
+		out.loggerLevel = TRACE;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -40,7 +48,7 @@ namespace F515_StandardLogger {
 	}
 	void Logger::trace(const char* message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::TRACE;
+		out.loggerLevel = TRACE;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -49,7 +57,7 @@ namespace F515_StandardLogger {
 
 	void Logger::warn(const std::string& message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::WARN;
+		out.loggerLevel = WARN;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -57,7 +65,7 @@ namespace F515_StandardLogger {
 	}
 	void Logger::warn(const char* message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::WARN;
+		out.loggerLevel = WARN;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -66,7 +74,7 @@ namespace F515_StandardLogger {
 
 	void Logger::error(const std::string& message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::ERROR;
+		out.loggerLevel = ERROR;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -74,7 +82,7 @@ namespace F515_StandardLogger {
 	}
 	void Logger::error(const char* message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::ERROR;
+		out.loggerLevel = ERROR;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -83,7 +91,7 @@ namespace F515_StandardLogger {
 
 	void Logger::fatal(const std::string& message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::FATAL;
+		out.loggerLevel = FATAL;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -91,7 +99,7 @@ namespace F515_StandardLogger {
 	}
 	void Logger::fatal(const char* message) {
 		MessageFormat out;
-		out.loggerLevel = (int)LoggerLevels::FATAL;
+		out.loggerLevel = FATAL;
 		out.message = message;
 		out.time = m_Time.getCurrentTime();
 		m_Log.push_back(out);
@@ -116,19 +124,19 @@ namespace F515_StandardLogger {
 			std::string temp;
 
 			switch (m.loggerLevel) {
-			case 0:
+			case INFO:
 				temp = "INFO: ";
 				break;
-			case 1:
+			case TRACE:
 				temp = "TRACE: ";
 				break;
-			case 2:
+			case WARN:
 				temp = "WARNING: ";
 				break;
-			case 3:
+			case ERROR:
 				temp = "ERROR: ";
 				break;
-			case 4:
+			case FATAL:
 				temp = "FATAL ERROR: ";
 				break;
 			default:
@@ -147,19 +155,19 @@ namespace F515_StandardLogger {
 			std::string temp;
 
 			switch (m.loggerLevel) {
-			case 0:
+			case INFO:
 				temp = "INFO: ";
 				break;
-			case 1:
+			case TRACE:
 				temp = "TRACE: ";
 				break;
-			case 2:
+			case WARN:
 				temp = "WARNING: ";
 				break;
-			case 3:
+			case ERROR:
 				temp = "ERROR: ";
 				break;
-			case 4:
+			case FATAL:
 				temp = "FATAL ERROR: ";
 				break;
 			default:
@@ -183,23 +191,23 @@ namespace F515_StandardLogger {
 		std::string temp;
 
 		switch (format.loggerLevel) {
-		case 0:
+		case INFO:
 			colour = 37;
 			temp = "INFO: ";
 			break;
-		case 1:
+		case TRACE:
 			colour = 93;
 			temp = "TRACE: ";
 			break;
-		case 2:
+		case WARN:
 			colour = 33;
 			temp = "WARNING: ";
 			break;
-		case 3:
+		case ERROR:
 			colour = 31;
 			temp = "ERROR: ";
 			break;
-		case 4:
+		case FATAL:
 			colour = 91;
 			temp = "FATAL ERROR: ";
 			break;
@@ -216,12 +224,12 @@ namespace F515_StandardLogger {
 
 
 		std::cout << ss.str() << std::endl;
-
 	}
 
-	/* NOTE */
+	/* NOTE: */
 	/* Struct Constructor and Destructor */
 	/* Just used so instances can be made */
+
 	MessageFormat::MessageFormat() : loggerLevel(0), message(""), time(0) {
 
 	}

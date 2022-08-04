@@ -1,7 +1,7 @@
 #ifndef _OS_SPECIFIC_H
 #define _OS_SPECIFIC_H
 
-#ifdef F515_PLATFORM WINDOWS
+#ifdef F515_PLATFORM_WINDOWS
     #include "OSSpecific/WindowsUtils.h"
         namespace F515_OSSpecific {
             typedef WindowsUtils OSUtils;

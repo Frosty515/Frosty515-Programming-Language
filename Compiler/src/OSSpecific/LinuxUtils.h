@@ -5,6 +5,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <thread>
 
 namespace F515_OSSpecific {
 
@@ -14,6 +15,9 @@ namespace F515_OSSpecific {
         ~LinuxUtils();
 
         uint64_t RunProccess(std::string cmdline, std::string startDirectory, uint32_t flags, bool waitForProcessToComplete);
+
+    private:
+        std::thread m_Thread;
     };
 
 }

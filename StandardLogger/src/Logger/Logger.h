@@ -6,6 +6,11 @@
 #include "../Core.h"
 #include "../Time/Time.h"
 
+#define INFO  0x4c6f6700
+#define TRACE 0x4c6f6701
+#define WARN  0x4c6f6702
+#define ERROR 0x4c6f6703
+#define FATAL 0x4c6f6704
 
 namespace F515_StandardLogger {
 
@@ -53,14 +58,6 @@ namespace F515_StandardLogger {
 
 	private:
 		void registerMessageForOutput(MessageFormat format);
-	};
-
-	enum class FROSTY515_API LoggerLevels {
-		INFO = 0,
-		TRACE = 1,
-		WARN = 2,
-		ERROR = 3,
-		FATAL = 4
 	};
 }
 

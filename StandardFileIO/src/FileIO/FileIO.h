@@ -1,9 +1,13 @@
 #ifndef _FILE_IO_H
 #define _FILE_IO_H
 
-#include "Core.h"
 #include <string>
 #include <vector>
+
+#include "../Core.h"
+#include "../OSSpecific.h"
+
+#include <StandardLogger.h>
 
 namespace F515_StandardFileIO {
 	class FROSTY515_API FileIO {
@@ -42,8 +46,6 @@ namespace F515_StandardFileIO {
 		void CopyFile(const std::string& src, const std::string& dest, bool overrideDest = false);
 		void CopyFile(const char* src, const char* dest, bool overrideDest = false);
 
-		#ifdef F515_PLATFORM_WINDOWS
-
 		void MakeDir(const std::string& path);
 		void MakeDir(const char* path);
 
@@ -59,15 +61,15 @@ namespace F515_StandardFileIO {
 		inline void RemoveDirectory(const std::string& path, bool removeTree = false) { RemoveDir(path, removeTree); };
 		inline void RemoveDirectory(const char* path, bool removeTree = false) { RemoveDir(path, removeTree); };
 
-		#else
-			#warning Directory systems are windows only
-		#endif
-
 		void Log(const char* str);
 		void Log(const std::string& str);
 
 		std::vector<std::string> ListDirContents(const char* path);
 		std::vector<std::string> ListDirContents(const std::string& path);
+	
+	private:
+		F515_StandardFileIO_OSSpecific::OSUtils m_OSUtils;
+		F515_StandardLogger::Logger m_Logger;
 	};
 }
 
