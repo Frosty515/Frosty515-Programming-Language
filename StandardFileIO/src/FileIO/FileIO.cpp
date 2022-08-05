@@ -360,11 +360,15 @@ namespace F515_StandardFileIO {
 	}
 
 	void FileIO::Log(const char* str) {
-		std::cout << "<Frosty515FileUtils-StandardFileIO> " << str << std::endl;
+		std::stringstream ss;
+		ss << "<Frosty515FileUtils-StandardFileIO> " << str;
+		m_Logger.info(ss.str());
 	}
 
 	void FileIO::Log(const std::string& str) {
-		std::cout << "<Frosty515FileUtils-StandardFileIO> " << str << std::endl;
+		std::stringstream ss;
+		ss << "<Frosty515FileUtils-StandardFileIO> " << str;
+		m_Logger.info(ss.str());
 	}
 
 	std::vector<std::string> FileIO::ListDirContents(const char* path) {

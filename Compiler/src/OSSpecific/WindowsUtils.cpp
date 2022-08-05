@@ -4,14 +4,13 @@
 namespace F515_OSSpecific {
 
 	WindowsUtils::WindowsUtils() {
-        m_Logger.setLoggerLevel((int)F515_StandardLogger::LoggerLevels::INFO);
         m_Logger.info("WindowsUtils initialized");
 	}
 	WindowsUtils::~WindowsUtils() {
 
 	}
 
-	void WindowsUtils::RunProcess(std::string cmdline, std::string startDirectory, DWORD flags, bool waitForProcessToComplete) {
+	void WindowsUtils::RunProcess(std::string cmdline, std::string startDirectory, uint32_t flags, bool waitForProcessToComplete) {
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
 

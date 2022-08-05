@@ -12,6 +12,7 @@ namespace F515_OSSpecific {
     void Run();
 
     LinuxUtils::LinuxUtils() {
+        m_Thread = (std::thread)nullptr;
     }
 
     LinuxUtils::~LinuxUtils() {
